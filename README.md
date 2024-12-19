@@ -73,6 +73,8 @@ Response format:
 }
 ```
 
+You can now test the API live on [API Preview](https://petit-animal-api.onrender.com/api)
+
 ## Technologies Used
 
 - Node.js
