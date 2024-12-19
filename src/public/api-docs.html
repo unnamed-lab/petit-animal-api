@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Documentation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #0f0f1a;
+        --text-color: #e0e0e0;
+        --primary-color: #1ca4f1;
+        --secondary-color: #72c2f0;
+        --accent-color: #e8eff7;
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(0, 255, 255, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(255, 0, 255, 0.1) 0%,
+            transparent 20%
+          );
+        margin: 0;
+        padding: 40px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 100%;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--primary-color);
+        text-shadow: 0 0 10px var(--primary-color);
+      }
+
+      h1 {
+        font-size: 3rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      pre {
+        background-color: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 15px;
+        overflow-x: auto;
+        color: var(--accent-color);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .endpoint {
+        background-color: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .endpoint:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+      }
+
+      .method {
+        font-weight: bold;
+        color: var(--secondary-color);
+        text-shadow: 0 0 5px var(--secondary-color);
+      }
+
+      .url {
+        color: var(--primary-color);
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+      }
+
+      li::before {
+        content: "\f105";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: var(--accent-color);
+        margin-right: 10px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+      }
+
+      input {
+        background-color: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 4px;
+        padding: 8px;
+        color: var(--text-color);
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
+      button {
+        background-color: var(--primary-color);
+        color: var(--bg-color);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px var(--primary-color);
+      }
+
+      button:hover {
+        background-color: var(--secondary-color);
+        box-shadow: 0 0 20px var(--secondary-color);
+      }
+
+      #response {
+        margin-top: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #response::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        z-index: -1;
+        filter: blur(20px);
+        opacity: 0.3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><i class="fas fa-robot"></i> API Documentation</h1>
+
+      <div class="endpoint">
+        <h2>
+          <span class="method">GET</span> <span class="url">/api/dogs</span>
+        </h2>
+        <p>
+          <i class="fas fa-info-circle"></i> Retrieve a paginated list of dogs.
+        </p>
+
+        <h3><i class="fas fa-cogs"></i> Query Parameters</h3>
+        <ul>
+          <li>
+            <strong>limit</strong> (optional): Number of items per page. Default
+            is 10.
+          </li>
+          <li><strong>page</strong> (optional): Page number. Default is 1.</li>
+        </ul>
+
+        <h3><i class="fas fa-reply"></i> Response</h3>
+        <pre>
+{
+  "dogs": [
+    {
+      "id": string,
+      "breed": string,
+      "type": "dog",
+      "image": string
+    },
+    ...
+  ],
+  "nextPage": number | undefined
+}
+            </pre
+        >
+
+        <h3><i class="fas fa-play"></i> Try it out</h3>
+        <label for="limit">Limit:</label>
+        <input type="number" id="limit" value="10" min="1" />
+        <label for="page">Page:</label>
+        <input type="number" id="page" value="1" min="1" />
+        <button onclick="fetchDogs()">
+          <i class="fas fa-paper-plane"></i> Send Request
+        </button>
+
+        <pre id="response"></pre>
+      </div>
+    </div>
+
+    <script>
+      async function fetchDogs() {
+        const limit = document.getElementById("limit").value;
+        const page = document.getElementById("page").value;
+        const responseElement = document.getElementById("response");
+
+        try {
+          const response = await fetch(`/api/dogs?limit=${limit}&page=${page}`);
+          const data = await response.json();
+          responseElement.textContent = JSON.stringify(data, null, 2);
+        } catch (error) {
+          responseElement.textContent = `Error: ${error.message}`;
+        }
+      }
+    </script>
+  </body>
+</html>
